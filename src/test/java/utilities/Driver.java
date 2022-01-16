@@ -64,7 +64,20 @@ public class Driver {
         }
     }
 
-
+    /*
+     * switches to new window by the exact title
+     * returns to original window if windows with given title not found
+     */
+    public static void switchToWindow(String targetTitle) {
+        String origin = Driver.getDriver().getWindowHandle();
+        for (String handle : Driver.getDriver().getWindowHandles()) {
+            Driver.getDriver().switchTo().window(handle);
+            if (Driver.getDriver().getTitle().equals(targetTitle)) {
+                return;
+            }
+        }
+        Driver.getDriver().switchTo().window(origin);
+    }
 }
 
 
